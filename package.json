@@ -1,0 +1,30 @@
+{
+  "name": "jonarshop",
+  "version": "1.0.0",
+  "description": "Jonar's new webshop to sell its products",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "lint": "eslint --ext .js ./src/",
+    "format": "prettier --check ./src/ --write ./src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mjmohammadi1/JonarShop.git"
+  },
+  "keywords": [],
+  "author": "Jafar Mohammadi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mjmohammadi1/JonarShop/issues"
+  },
+  "homepage": "https://github.com/mjmohammadi1/JonarShop#readme",
+  "devDependencies": {
+    "eslint": "^8.1.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "2.4.1"
+  }
+}
