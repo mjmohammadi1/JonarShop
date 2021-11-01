@@ -7,7 +7,22 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "lint": "eslint --ext .js ./src/",
-    "format": "prettier --check ./src/ --write ./src/"
+    "format": "prettier --check ./src/ --write ./src/",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "src/**/*.js": [
+      "eslint ./src/ --fix"
+    ],
+    "./src/**": [
+      "prettier --write ./src/"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   },
   "repository": {
     "type": "git",
@@ -21,10 +36,15 @@
   },
   "homepage": "https://github.com/mjmohammadi1/JonarShop#readme",
   "devDependencies": {
+    "@commitlint/cli": "^13.2.1",
+    "@commitlint/config-conventional": "^13.2.0",
     "eslint": "^8.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^11.2.6",
+    "nodemon": "^2.0.14",
     "prettier": "2.4.1"
   }
 }
