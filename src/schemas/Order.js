@@ -4,7 +4,6 @@ const OrderSchema =new mongoose.Schema({
 	userId:{
 		type: String,
 		required: true,
-		unique: true
 	},
 	products:[
 		{
@@ -30,6 +29,5 @@ const OrderSchema =new mongoose.Schema({
 		default: 'pending'
 	}
 	}, {timestamps: true});
-module.exports = {
-	OrderSchema : mongoose.model('Order', OrderSchema)
-};
+
+module.exports = mongoose.model('Order', OrderSchema);
