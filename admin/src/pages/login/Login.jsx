@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { login } from "../../redux/stateApiRequests";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useHistory } from "react-router-dom";
-import { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 
 const Login = (props) => {
   const user = useSelector((state) => state.user.currentUser);
 
   const location = useLocation().state;
   const targetPage = location.from.pathname;
-  const history = useHistory();
 
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
@@ -47,10 +45,12 @@ const Login = (props) => {
       }}
     >
       <input
+        style={{ padding: 10, marginBottom: 5 }}
         placeholder='username'
         onChange={(event) => handleUserInput(event.target.value, "username")}
       />
       <input
+        style={{ padding: 10, marginBottom: 5 }}
         placeholder='password'
         type='password'
         onChange={(event) => handleUserInput(event.target.value, "password")}

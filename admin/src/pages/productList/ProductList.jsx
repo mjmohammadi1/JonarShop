@@ -12,7 +12,7 @@ export default function ProductList() {
 
   useEffect(() => {
     getProducts(dispatch);
-  }, [dispatch]);
+  }, []);
 
   const handleDelete = (id) => {
     deleteProduct(id, dispatch);

@@ -59,8 +59,8 @@ export default function NewProduct() {
           default:
         }
       },
-      (error) => {
-        console.log(error);
+      (err) => {
+        console.log(err);
       },
       () => {
         getDownloadURL(firestoreUploadTask.snapshot.ref).then((downloadURL) => {
