@@ -1,35 +1,3 @@
-# FROM node:14 AS developmwnt
-# ENV NODE_ENV developmwnt
-# WORKDIR /client
-# COPY ["package.json","yarn.lock", "./"]
-# RUN npm install
-# COPY . .
-
-# ARG REACT_APP_HOST_URL
-# ENV REACT_APP_HOST_URL=$REACT_APP_HOST_URL
-
-# ARG REACT_APP_STRIPE_KEY
-# ENV REACT_APP_STRIPE_KEY=$REACT_APP_STRIPE_KEY
-# CMD ["npm","start"]
-# # RUN npm run build
-
-# FROM node:14 AS builder
-# ENV NODE_ENV production
-# WORKDIR /client
-# COPY ["package.json","yarn.lock", "./"]
-# RUN npm install --production
-# COPY . .
-# RUN npm run build
-
-
-# FROM nginx:1.21.0-alpine AS production
-# COPY --from=builder /client/build /usr/share/nginx/html
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# EXPOSE 80
-# CMD ["nginx","-g","daemon off;"]
-
-
 FROM node:14-alpine AS development
 ENV NODE_ENV development
 # Add a work directory
@@ -41,7 +9,7 @@ RUN yarn install
 # Copy app files
 COPY . .
 # Expose port
-EXPOSE 3000
+EXPOSE 3001
 # Start the app
 CMD [ "yarn", "start" ]
 

@@ -9,10 +9,10 @@ services:
     volumes:
       - ./data:/data/db
     networks:
-      - jonar_mern_api
+      - jonar
 
   server:
-    container_name: jonar_server_nginx
+    container_name: jonar_server
     build: .
     entrypoint: ['./wait-for-it.sh', '${DB_HOST}:${DB_PORT}', '--', './app-entrypoint.sh']
     restart: unless-stopped
@@ -34,10 +34,32 @@ services:
     ports:
       - 5000:${SERVER_PORT}
     networks:
-      - jonar_mern_api
+      - jonar
+
+  client:
+    container_name: jonar_client
+    build: ../client/
+    stdin_open: true
+    ports:
+      - '3000:80'
+    depends_on:
+      - server
+    networks:
+      - jonar
+
+  admin:
+    container_name: jonar_admin
+    build: ../admin/
+    stdin_open: true
+    ports:
+      - '3001:80'
+    depends_on:
+      - server
+    networks:
+      - jonar
 
 networks:
-  jonar_mern_api:
+  jonar:
     driver: bridge
 volumes:
   mongodb:

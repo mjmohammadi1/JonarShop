@@ -6,9 +6,9 @@ LABEL description="Image for the Jonar Shop API"
 
 WORKDIR /app
 
-COPY ["package.json","package-lock.json*", "npm-shrinkwrap.json*", "./"]
+COPY ["package.json","package-lock.json*", "./"]
 
-RUN npm install && npm cache clean --force
+RUN npm install --only=production && npm cache clean --force
 
 COPY . .
 
