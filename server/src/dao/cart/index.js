@@ -1,40 +1,45 @@
+const { database } = require('../../db');
 const { cartSchema } = require('../../schemas');
 
-const createCart = async (userId, products) => {
-  const newCart = new cartSchema({
-    userId,
-    products,
-  });
-  return newCart.save();
-};
+module.exports = ({ _database = database } = {}) => {
+  _database
+    .then((connection) => {})
+    .catch((err) => {
+      throw ApiError.internal(err);
+    });
 
-const updateCart = async (id, products) => {
-  const updatedCart = await cartSchema.findByIdAndUpdate(
-    id,
-    {
-      products,
+  return {
+    async createCart(userId, products) {
+      const newCart = new cartSchema({
+        userId,
+        products,
+      });
+      return newCart.save();
     },
-    { new: true }
-  );
-  return updatedCart;
+    async updateCart(id, products) {
+      const updatedCart = await cartSchema.findByIdAndUpdate(
+        id,
+        {
+          products,
+        },
+        { new: true }
+      );
+      return updatedCart;
+    },
+    async deleteCart(id, products) {
+      const deleteResult = await cartSchema.findByIdAndDelete(id);
+      if (deleteResult === null) {
+        throw ApiError.notFound('Not Found');
+      }
+      return deleteResult;
+    },
+    async getUserCart(userId) {
+      const userCart = await cartSchema.findOne({ userId });
+      return userCart;
+    },
+    async getAllCarts() {
+      const AllCarts = await cartSchema.find();
+      return deleteResult;
+    },
+  };
 };
-
-const deleteCart = async (id, products) => {
-  const deleteResult = await cartSchema.findByIdAndDelete(id);
-  if (deleteResult === null) {
-    throw ApiError.notFound('Not Found');
-  }
-  return deleteResult;
-};
-
-const getUserCart = async (userId) => {
-  const userCart = await cartSchema.findOne({ userId });
-  return userCart;
-};
-
-const getAllCarts = async () => {
-  const AllCarts = await cartSchema.find();
-  return deleteResult;
-};
-
-module.exports = { createCart, updateCart, deleteCart, getUserCart, getAllCarts };

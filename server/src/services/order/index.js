@@ -1,31 +1,33 @@
 const { orderDAO } = require('../../dao');
 
-const createOrder = async (params) => {
-  const { userId, products, amount, address } = params;
-  return await orderDAO.createOrder(userId, products, amount, address);
-};
+module.exports = ({ _orderDAO = orderDAO } = {}) => {
+  return {
+    async createOrder(params) {
+      const { userId, products, amount, address } = params;
+      return await _orderDAO().createOrder(userId, products, amount, address);
+    },
 
-const updateOrder = async (params) => {
-  const { id, order } = params;
-  return await orderDAO.updateOrder(id, order);
-};
+    async updateOrder(params) {
+      const { id, order } = params;
+      return await _orderDAO().updateOrder(id, order);
+    },
 
-const daleteOrder = async (params) => {
-  const { id } = params;
-  return await orderDAO.daleteOrder(id);
-};
+    async daleteOrder(params) {
+      const { id } = params;
+      return await _orderDAO().daleteOrder(id);
+    },
 
-const getUserOrders = async (params) => {
-  const { userId } = params;
-  return await orderDAO.getUserOrders(userId);
-};
+    async getUserOrders(params) {
+      const { userId } = params;
+      return await _orderDAO().getUserOrders(userId);
+    },
 
-const getAllOrders = async () => {
-  return await orderDAO.getAllOrders();
-};
+    async getAllOrders() {
+      return await _orderDAO().getAllOrders();
+    },
 
-const getMonthlyIncome = async ({ productId = undefined } = {}) => {
-  return await orderDAO.getMonthlyIncome();
+    async getMonthlyIncome({ productId = undefined } = {}) {
+      return await _orderDAO().getMonthlyIncome(productId);
+    },
+  };
 };
-
-module.exports = { createOrder, getAllOrders, getMonthlyIncome, updateOrder, daleteOrder, getUserOrders };

@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon -r dotenv/config index.js dotenv_config_path=.env",
+    "start": "node -r dotenv/config index.js dotenv_config_path=.env",
+    "seed": "node -r dotenv/config ./src/db/seeds/index.js dotenv_config_path=.env",
     "lint": "eslint --ext .js ./src/",
     "format": "prettier --check ./src/ --write ./src/",
     "prepare": "husky install"

@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo
+    container_name: jonar_mongodb
+    restart: always
+    ports:
+      - 27017:${DB_PORT}
+    volumes:
+      - ./data:/data/db
+    networks:
+      - jonar_mern_api
+
+  server:
+    container_name: jonar_server_nginx
+    build: .
+    entrypoint: ['./wait-for-it.sh', '${DB_HOST}:${DB_PORT}', '--', './app-entrypoint.sh']
+    restart: unless-stopped
+    volumes:
+      - /app/node_modules
+      - .:/app
+    depends_on:
+      - mongodb
+    environment:
+      SERVER_PORT: ${SERVER_PORT}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_AUTH_SOURCE: ${DB_AUTH_SOURCE}
+      API_VERSION: ${API_VERSION}
+      JWT_SECRET: ${JWT_SECRET}
+      STRIPE_KEY: ${STRIPE_KEY}
+    ports:
+      - 5000:${SERVER_PORT}
+    networks:
+      - jonar_mern_api
+
+networks:
+  jonar_mern_api:
+    driver: bridge
+volumes:
+  mongodb:
+    driver: local

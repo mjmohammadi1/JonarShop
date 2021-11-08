@@ -1,8 +1,7 @@
 const router = require('express').Router();
-const stripe = require('stripe')(process.env.STRIPE_KEY);
-const {
-  stripeController: { chargeUser },
-} = require('../../controllers');
+
+const { stripeController } = require('../../controllers');
+const { chargeUser } = stripeController();
 
 router.post('/payment', chargeUser);
 module.exports = router;

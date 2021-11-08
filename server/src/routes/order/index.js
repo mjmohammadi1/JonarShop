@@ -1,12 +1,9 @@
 const router = require('express').Router();
 const { validateDto, authUserMiddleWare, authAdminMiddleWare } = require('../../middleware');
-const {
-  schemas: { orderSchema },
-} = require('../../utils');
-const {
-  orderController: { createOrder, getAllOrders, getMonthlyIncome, updateOrder, daleteOrder, getUserOrders },
-} = require('../../controllers');
-//authUserMiddleWare,validateDto(orderSchema)
+
+const { orderController } = require('../../controllers');
+const { createOrder, getAllOrders, getMonthlyIncome, updateOrder, daleteOrder, getUserOrders } = orderController();
+
 router.post('/', createOrder);
 router.get('/', authAdminMiddleWare, getAllOrders);
 router.get('/income', authAdminMiddleWare, getMonthlyIncome);

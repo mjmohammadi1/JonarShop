@@ -4,9 +4,8 @@ const { validateDto, authUserMiddleWare, authAdminMiddleWare } = require('../../
 const {
   schemas: { productSchema },
 } = require('../../utils');
-const {
-  productController: { createProduct, deleteProduct, getProducts, getProduct },
-} = require('../../controllers');
+const { productController } = require('../../controllers');
+const { createProduct, deleteProduct, getProducts, getProduct } = productController();
 
 router.get('/', getProducts);
 router.get('/:id', getProduct);
