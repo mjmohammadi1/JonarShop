@@ -2,4 +2,5 @@ node_modules
 /data
 /config/*
 .env
+/logs/jonar-server.log
 .eslintcache
