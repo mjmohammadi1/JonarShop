@@ -1,5 +1,6 @@
 # Jonar Shop
 
+
 Jonar Shop is a web application that is built to ease the shopping process for the owner and the customers, using modern new technologies.
 
 ## Features
@@ -83,3 +84,18 @@ to stop the application and remove the containers :
 cd server
 make down
 ```
+__environments variables are needed to run the project.__
+
+In the server directory :
+
+## To run the server:
+- `npm i`
+- `npm run start`
+
+## To run the client:
+- `npm i`
+- `npm run start`
+
+## To run the admin panel:
+- `npm i`
+- `npm run start`
