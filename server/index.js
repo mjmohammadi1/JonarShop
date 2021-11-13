@@ -3,9 +3,10 @@ const cors = require('cors');
 const app = express();
 
 const { userRouter, authRouter, productRouter, cartRouter, orderRouter, stripeRouter } = require('./src/routes');
-const { apiErrorHandler } = require('./src/utils');
+const { apiErrorHandler, logger } = require('./src/utils');
 const { SERVER_PORT, API_VERSION } = process.env;
 
+app.use(logger);
 app.use(cors());
 app.use(express.json());
 app.use('/api/v1/auth', authRouter);

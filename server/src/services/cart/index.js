@@ -1,27 +1,25 @@
-const {cartDAO} = require('../../dao');
+const { cartDAO } = require('../../dao');
 
-const createCart = async(params)=>{
-	const {userId, products} = params;
-	return await cartDAO.createCart(userId, products);
+module.exports = ({ _cartDAO = cartDAO } = {}) => {
+  return {
+    async createCart(params) {
+      const { userId, products } = params;
+      return await _cartDAO().createCart(userId, products);
+    },
+    async updateCart(params) {
+      const { id } = params;
+      return await _cartDAO().updateCart(id);
+    },
+    async deleteCart(params) {
+      const { id } = params;
+      return await _cartDAO().deleteCart(id);
+    },
+    async getUserCart(params) {
+      const { userId } = params;
+      return await _cartDAO().getUserCart(userId);
+    },
+    async getAllCarts() {
+      return await _cartDAO().getAllCarts();
+    },
+  };
 };
-
-const updateCart = async(params)=>{
-	const {id} = params;
-	return await cartDAO.updateCart(id);
-};
-
-const deleteCart = async(params)=>{
-	const {id} = params;
-	return await cartDAO.deleteCart(id);
-};
-
-const getUserCart = async(params)=>{
-	const {userId} = params;
-	return await cartDAO.getUserCart(userId);
-};
-
-const getAllCarts = async()=>{
-	return await cartDAO.getAllCarts();
-};
-
-module.exports = {createCart,updateCart,deleteCart,getUserCart,getAllCarts};

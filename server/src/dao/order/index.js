@@ -1,58 +1,64 @@
-const database = require('../../db');
+const { database } = require('../../db');
 const { orderSchema } = require('../../schemas');
+const { ApiError } = require('../../utils');
+module.exports = ({ _database = database } = {}) => {
+  _database
+    .then((connection) => {})
+    .catch((err) => {
+      throw ApiError.internal(err);
+    });
 
-const createOrder = async (userId, products, amount, address) => {
-  await database;
-  const newOrder = new orderSchema({ userId, products, amount, address });
-  return await newOrder.save();
-};
-
-const updateOrder = async (id, order) => {
-  return await orderSchema.findByIdAndUpdate(
-    id,
-    {
-      $set: order,
+  const conntection = _database
+    .then((connection) => {})
+    .catch((err) => {
+      throw ApiError.internal(err);
+    });
+  return {
+    async createOrder(userId, products, amount, address) {
+      const newOrder = new orderSchema({ userId, products, amount, address });
+      return await newOrder.save();
     },
-    { new: true }
-  );
-};
-
-const daleteOrder = async (id) => {
-  return await orderDAO.daleteOrder(id);
-};
-
-const getUserOrders = async (userId) => {
-  await database;
-  return await orderSchema.find(userId);
-};
-
-const getAllOrders = async () => {
-  await database;
-  return await orderSchema.find();
-};
-
-const getMonthlyIncome = async (productId) => {
-  await database;
-  const date = new Date();
-  const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
-  const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
-
-  const income = await orderSchema.aggregate([
-    { $match: { createdAt: { $gte: previousMonth }, ...(productId && { products: { $eleMatch: { productId } } }) } },
-    {
-      $project: {
-        month: { $month: '$createdAt' },
-        sales: '$amount',
-      },
+    async updateOrder(id, order) {
+      return await orderSchema.findByIdAndUpdate(
+        id,
+        {
+          $set: order,
+        },
+        { new: true }
+      );
     },
-    {
-      $group: {
-        _id: '$month',
-        total: { $sum: '$sales' },
-      },
+    async daleteOrder(id) {
+      return await orderDAO.daleteOrder(id);
     },
-  ]);
-  return income;
-};
+    async getUserOrders(userId) {
+      return await orderSchema.find(userId);
+    },
+    async getAllOrders() {
+      return await orderSchema.find();
+    },
+    async getMonthlyIncome(productId) {
+      const date = new Date();
+      const lastMonth = new Date(date.setMonth(date.getMonth() - 1));
+      const previousMonth = new Date(new Date().setMonth(lastMonth.getMonth() - 1));
 
-module.exports = { createOrder, getMonthlyIncome, getAllOrders, getUserOrders, updateOrder, daleteOrder };
+      const income = await orderSchema.aggregate([
+        {
+          $match: { createdAt: { $gte: previousMonth }, ...(productId && { products: { $eleMatch: { productId } } }) },
+        },
+        {
+          $project: {
+            month: { $month: '$createdAt' },
+            sales: '$amount',
+          },
+        },
+        {
+          $group: {
+            _id: '$month',
+            total: { $sum: '$sales' },
+          },
+        },
+      ]);
+      return income;
+    },
+  };
+};

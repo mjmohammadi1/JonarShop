@@ -1,33 +1,29 @@
 const { userDAO } = require('../../dao');
 
-const updateUserPassword = async(params)=>{
-	const {id, password} = params;
-	return userDAO.updateUserPassword(id, password);
-};
+module.exports = ({ _userDAO = userDAO } = {}) => {
+  return {
+    async updateUserPassword(params) {
+      const { id, password } = params;
+      return _userDAO().updateUserPassword(id, password);
+    },
 
-const deleteUser = async(params)=>{
-	const {id} = params;
-	return userDAO.deleteUser(id);
-};
+    async deleteUser(params) {
+      const { id } = params;
+      return _userDAO().deleteUser(id);
+    },
 
-const getUser = async(params)=>{
-	const {id} = params;
-	return userDAO.getUser(id);
-};
+    async getUser(params) {
+      const { id } = params;
+      return _userDAO().getUser(id);
+    },
 
-const getUsers = async(params)=>{
-	const {query} = params;
-	return userDAO.getUsers(query);
-};
+    async getUsers(params) {
+      const { query } = params;
+      return _userDAO().getUsers(query);
+    },
 
-const getUsersStats = async()=>{
-	return userDAO.getUsersStats();
-};
-
-module.exports ={
-	updateUserPassword,
-	deleteUser,
-	getUser,
-	getUsers,
-	getUsersStats
+    async getUsersStats() {
+      return _userDAO().getUsersStats();
+    },
+  };
 };

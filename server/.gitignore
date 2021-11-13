@@ -1,5 +1,6 @@
 node_modules
-pgdata
+/data
 /config/*
 .env
+/logs/jonar-server.log
 .eslintcache

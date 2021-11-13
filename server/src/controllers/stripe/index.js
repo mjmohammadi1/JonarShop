@@ -1,13 +1,13 @@
-const { ApiError } = require('../../utils');
 const { stripeService } = require('../../services');
-
-const chargeUser = async (req, res, next) => {
-  try {
-    const paymentResult = await stripeService.chargeUser(req.body);
-    res.status(201).json(paymentResult);
-  } catch (err) {
-    next(err);
-  }
+module.exports = ({ _stripeService = stripeService } = {}) => {
+  return {
+    async chargeUser(req, res, next) {
+      try {
+        const paymentResult = await _stripeService().chargeUser(req.body);
+        res.status(201).json(paymentResult);
+      } catch (err) {
+        next(err);
+      }
+    },
+  };
 };
-
-module.exports = { chargeUser };

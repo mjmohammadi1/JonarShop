@@ -5,14 +5,11 @@ const cartService = require('./cart');
 const orderService = require('./order');
 const stripeService = require('./stripe');
 const database = require('../db');
-module.exports = async () => {
-  await database;
-  return {
-    authService,
-    userService,
-    productService,
-    cartService,
-    orderService,
-    stripeService,
-  };
+module.exports = {
+  authService,
+  userService,
+  productService,
+  cartService,
+  orderService,
+  stripeService,
 };

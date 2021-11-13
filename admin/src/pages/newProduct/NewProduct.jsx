@@ -95,7 +95,7 @@ export default function NewProduct() {
           <input
             name='title'
             type='text'
-            placeholder='Apple Airpods'
+            placeholder='Leeds Winter Jacket'
             onChange={handleInputChange}
           />
         </div>
@@ -141,7 +141,7 @@ export default function NewProduct() {
           <label>Colors</label>
           <input
             type='text'
-            placeholder='Red,Blue'
+            placeholder='red,blue'
             onChange={(event) => handleSplittedInputs(event, "color")}
           />
         </div>
