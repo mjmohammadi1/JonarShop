@@ -1,6 +1,5 @@
 # Jonar Shop
 
-
 Jonar Shop is a web application that is built to ease the shopping process for the owner and the customers, using modern new technologies.
 
 ## Features
@@ -46,16 +45,14 @@ Jonar Shop requires 3 .env files in the main directory of the server, client, an
 In the ./server, create a .env file with the following structure and your values:
 
 ```
-DB_USER=value
-DB_PASSWORD=value
 DB_HOST=value
 DB_PORT=value
-DB_AUTH_SOURCE=value
 DB_NAME=value
 SERVER_PORT=value
 API_VERSION=value
 JWT_SECRET=value
 STRIPE_KEY=value
+MONGO_DB_URL=value
 ```
 
 In the ./client, create a .env file with the following structure and your values:
@@ -84,18 +81,22 @@ to stop the application and remove the containers :
 cd server
 make down
 ```
-__environments variables are needed to run the project.__
+
+**environments variables are needed to run the project.**
 
 In the server directory :
 
 ## To run the server:
+
 - `npm i`
 - `npm run start`
 
 ## To run the client:
+
 - `npm i`
 - `npm run start`
 
 ## To run the admin panel:
+
 - `npm i`
 - `npm run start`

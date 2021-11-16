@@ -3,10 +3,10 @@ const { users } = require('./user');
 const { orders } = require('./orders');
 
 const mongoose = require('mongoose');
-const { DB_NAME, DB_PORT } = process.env;
+const { MONGO_DB_URL } = process.env;
 
 const database = async () => {
-  const { connection } = mongoose.connect(`mongodb://mongodb:${DB_PORT}/${DB_NAME}`, {
+  const { connection } = mongoose.connect(MONGO_DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });

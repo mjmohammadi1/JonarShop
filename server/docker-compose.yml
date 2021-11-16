@@ -23,11 +23,9 @@ services:
       - mongodb
     environment:
       SERVER_PORT: ${SERVER_PORT}
-      DB_USER: ${DB_USER}
-      DB_PASSWORD: ${DB_PASSWORD}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
-      DB_AUTH_SOURCE: ${DB_AUTH_SOURCE}
+      MONGO_DB_URL: ${MONGO_DB_URL}
       API_VERSION: ${API_VERSION}
       JWT_SECRET: ${JWT_SECRET}
       STRIPE_KEY: ${STRIPE_KEY}
