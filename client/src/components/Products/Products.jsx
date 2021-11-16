@@ -10,7 +10,6 @@ const Products = ({ category, filters, sort }) => {
 
   useEffect(() => {
     const getProducts = async () => {
-      console.log("publicRequest is : ", publicRequest);
       try {
         const res = await publicRequest.get(
           category ? `/products?category=${category}` : "/products"
