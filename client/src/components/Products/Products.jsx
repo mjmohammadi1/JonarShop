@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import Product from "../Product/Product";
 import axios from "axios";
+import { publicRequest } from "../utils/api";
+
 import { Container } from "./styles";
 const Products = ({ category, filters, sort }) => {
   const [products, setProducts] = useState([]);
@@ -8,6 +10,7 @@ const Products = ({ category, filters, sort }) => {
 
   useEffect(() => {
     const getProducts = async () => {
+      console.log("publicRequest is : ", publicRequest);
       try {
         const res = await axios.get(
           category
