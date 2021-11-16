@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import Product from "../Product/Product";
-import axios from "axios";
 import { publicRequest } from "../utils/api";
 
 import { Container } from "./styles";
