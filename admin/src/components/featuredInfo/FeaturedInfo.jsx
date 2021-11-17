@@ -9,7 +9,7 @@ export default function FeaturedInfo() {
   const getIncome = async () => {
     try {
       const result = await request.get("orders/income");
-      setIncome(result.data);
+      setIncome(result.data.sort((a, b) => a._id - b._id));
       setPercentage((result.data[1].total * 100) / result.data[0].total - 100);
     } catch {}
   };
@@ -19,7 +19,7 @@ export default function FeaturedInfo() {
   return (
     <div className='featured'>
       <div className='featuredItem'>
-        <span className='featuredTitle'>Revanue</span>
+        <span className='featuredTitle'>Month Income</span>
         <div className='featuredMoneyContainer'>
           <span className='featuredMoney'>${income[1]?.total}</span>
           <span className='featuredMoneyRate'>
