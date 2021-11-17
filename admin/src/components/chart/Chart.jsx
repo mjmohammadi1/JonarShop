@@ -9,11 +9,12 @@ import {
 } from "recharts";
 
 const Chart = ({ title, data, dataKey, grid }) => {
+  const joinedUsers = data.sort((a, b) => a.id - b.id);
   return (
     <div className='chart'>
       <h3 className='chartTitle'>{title}</h3>
       <ResponsiveContainer width='100%' aspect={4 / 1}>
-        <LineChart data={data}>
+        <LineChart data={joinedUsers}>
           <XAxis dataKey='name' stroke='#5550bd' />
           <Line type='monotone' dataKey={dataKey} stroke='#5550bd' />
           <Tooltip />
