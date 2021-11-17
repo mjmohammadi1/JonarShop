@@ -17,11 +17,11 @@ down-V:
 	docker-compose down -v
 
 client-prod:
-		NODE_ENV=production pm2 start pm2.config.js
-		cd ../client && NODE_ENV=production pm2 start pm2.config.js
+		NODE_ENV=production pm2 start --name jonar-server npm -- start
+		cd ../client && NODE_ENV=production pm2 start --name jonar-client npm -- start
 		pm2 monit
 
 admin-prod:
-		NODE_ENV=production pm2 start pm2.config.js
-		cd ../admin && NODE_ENV=production pm2 start pm2.config.js
+		NODE_ENV=production pm2 start --name jonar-server npm -- start
+		cd ../admin && NODE_ENV=production pm2 start --name jonar-admin npm -- start
 		pm2 monit
