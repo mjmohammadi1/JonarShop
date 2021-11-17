@@ -21,6 +21,7 @@ Jonar Shop uses a number of open source projects to work properly:
 - Docker - to ease deployment.
 - Nginx - Reverse Proxy.
 - Morgan - to log the requests and responses to the server.
+- PM2 - to manage, monitor the processes of the application.
 - Ajv - to validate schema of the body of upcoming requests to the server.
 - Stripe - to handle payments.
 - Google Firestore - to store images of the products.
@@ -32,6 +33,7 @@ Jonar Shop uses a number of open source projects to work properly:
 - Error Handling is happening at the Controller level only, this is done to reduce the complexity and extra code to handle the error at lower levels.
 - Used A Global Error Handling approach to improve the efficiency of the development and reduce the risk of human errors when returning errors from the server.
 - Used Ajv as middleware and let the Controller, Service, and DAO work on their responsibilities only.
+- Used PM2 to manage and monitor the processes that this application has. It restarts the app, sends notification emails when an issue happens, and provides a dashboard to see the metrics.
 - Used Builder pattern with docker to generate builds for different environments and phases. I specially put effort to generate optimized builds on the Client and Admin apps.
 - Used Seeds to prepopulate the database with sample data which is useful to test the app.
 - Used Google Firestore to store the images of the products that the admin is adding to the store. this helps to preserve the images in the long run.
@@ -82,7 +84,52 @@ cd server
 make down
 ```
 
-**environments variables are needed to run the project.**
+PM2 is needed to run the app in production mode, so make sure to install it globally before running the production mode by running : `npm i pm2 -g`
+
+to run the admin panel in production :
+
+```
+cd server
+make admin-prod
+```
+
+to run the client in production :
+
+```
+cd server
+make client-prod
+```
+
+to monitor the running processes:
+
+```
+cd server
+make client-prod
+```
+
+to monitor the logs in the terminal :
+
+```
+pm2 monitor
+```
+
+to see the dashboard prodiving information about the processes :
+
+```
+pm2 plus
+```
+
+to stop all the running processes :
+
+```
+pm2 stop all
+```
+
+to delete all the running processes :
+
+```
+pm2 delete all
+```
 
 In the server directory :
 
